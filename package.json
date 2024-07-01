@@ -36,7 +36,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "start": "node server.js",
+    "start": "vite",
     "build": "vite build",
     "serve": "vite preview"
   },
