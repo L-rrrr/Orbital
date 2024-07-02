@@ -22,8 +22,8 @@ const Filter = () => {
   const setFilter = (filters) => {
     const { propertyType, roomType, minPrice, maxPrice } = filters;
     const filteredData = hostels.filter((hostel) => {
-      const matchesPropertyType = propertyType.length === 0 || propertyType.every(mainType => hostel.type.includes(mainType));
-      const matchesRoomType = roomType.length === 0 || roomType.every(subType => hostel.type.includes(subType));
+      const matchesPropertyType = propertyType.length === 0 || propertyType.some(mainType => hostel.type.includes(mainType));
+      const matchesRoomType = roomType.length === 0 || roomType.some(subType => hostel.type.includes(subType));
       const matchesMinPrice = minPrice === '' || hostel.price >= parseFloat(minPrice);
       const matchesMaxPrice = maxPrice === '' || hostel.price <= parseFloat(maxPrice);
       return matchesPropertyType && matchesRoomType && matchesMinPrice && matchesMaxPrice;
