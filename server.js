@@ -38,8 +38,7 @@ app.listen(port, () => {
 
 
 
-
-
+// // with new cors configuration
 // const express = require('express');
 // const mongoose = require('mongoose');
 // const bodyParser = require('body-parser');
@@ -53,19 +52,17 @@ app.listen(port, () => {
 // // Middleware
 // app.use(bodyParser.json());
 
-// // Configure CORS
-// const allowedOrigins = ['https://orbital-chi.vercel.app', 'http://localhost:5173']; // Add your Vercel frontend URL and localhost for development
+// // CORS configuration
+// const allowedOrigins = ['https://orbital-chi.vercel.app', 'http://localhost:3000'];
 // app.use(cors({
 //   origin: function (origin, callback) {
-//     // Allow requests with no origin (like mobile apps or curl requests)
-//     if (!origin) return callback(null, true);
-//     if (allowedOrigins.indexOf(origin) === -1) {
-//       const msg = 'The CORS policy for this site does not allow access from the specified origin.';
-//       return callback(new Error(msg), false);
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
 //     }
-//     return callback(null, true);
 //   },
-//   credentials: true, // Allow credentials
+//   credentials: true // Allow credentials if needed
 // }));
 
 // // MongoDB connection
@@ -89,3 +86,9 @@ app.listen(port, () => {
 // app.listen(port, () => {
 //   console.log(`Server running on port ${port}`);
 // });
+
+
+
+
+
+
