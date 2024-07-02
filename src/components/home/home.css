@@ -91,15 +91,16 @@
   overflow: hidden;
 }
 
-.map-container {
+.home-map-container {
   margin-top: 20px;
   width: 100%;
-  height: 600px; /* Increase the height of the map component */
+  height: 100%; /* Increase the height of the map component */
   position: relative; /* Keep map position static */
 }
 
 .map-image {
   max-width: 100%;
+  max-height: 100%;
   border-radius: 10px;
 }
 
