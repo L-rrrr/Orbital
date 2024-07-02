@@ -47,9 +47,9 @@ const Home = () => {
     fetchHostels();
   }, [setHostels, setFilteredHostels, location.state]);
 
-  useEffect(() => {
-    console.log('Filtered Hostels:', filteredHostels); // Debugging line
-  }, [filteredHostels]);
+  // useEffect(() => {
+    // console.log('Filtered Hostels:', filteredHostels); // Debugging line
+  // }, [filteredHostels]);
 
   const handleSearch = (filteredData) => {
     setFilteredHostels(filteredData);
@@ -95,7 +95,7 @@ const Home = () => {
         </div>
         <div className="map-explore-section">
           <h2>Map(click on pin to view hostel info)</h2>
-          <div className="map-container">
+          <div className="home-map-container"> 
             <Map items={filteredHostels} />
           </div>
         </div>
