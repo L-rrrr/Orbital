@@ -8,7 +8,7 @@ const Rating = ({ hostelId }) => {
   const { currentUser } = useAuth();
   const [rating, setRating] = useState(null);
   const [editMode, setEditMode] = useState(false);
-  const backendUrl = process.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+  const backendUrl =  import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
   
   useEffect(() => {
     const fetchRating = async () => {
