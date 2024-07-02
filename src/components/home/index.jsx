@@ -95,7 +95,7 @@ const Home = () => {
         </div>
         <div className="map-explore-section">
           <h2>Map(click on pin to view hostel info)</h2>
-          <div className="map-container">
+          <div className="home-map-container">
             <Map items={filteredHostels} />
           </div>
         </div>
