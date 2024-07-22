@@ -1,0 +1,50 @@
+#create-post-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+#create-post-input-container {
+    margin-bottom: 16px;
+}
+
+.create-post {
+    width: 100%;
+    min-height: 100px;
+    max-height: 400px;
+    max-width: 100%;
+    resize: both;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+#buttons-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-create-post-page {
+    padding: 8px 16px;
+    margin-right: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+}
+
+.button-create-post-page:hover {
+    background-color: #0056b3;
+}
+
+#nav-link-back-to-forum {
+    color: white;
+    text-decoration: none;
+}

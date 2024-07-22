@@ -9,13 +9,13 @@ const Header = () => {
   const { userLoggedIn, currentUser } = useAuth();
   const defaultPhotoURL = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png";
   const [open, setOpen] = useState(false);
-  const [photoURL, setPhotoURL] = useState(currentUser?.photoURL || "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png");
+  const [photoURL, setPhotoURL] = useState(currentUser?.photoURL || defaultPhotoURL);
 
   useEffect(() => {
     if (currentUser?.photoURL) {
       setPhotoURL(currentUser.photoURL);
     } else {
-        setPhotoURL(defaultPhotoURL);
+      setPhotoURL(defaultPhotoURL);
     }
   }, [currentUser]);
 
@@ -28,6 +28,7 @@ const Header = () => {
         </Link>
         <Link to="/home" className="nav-button">Home</Link>
         <Link to="/explore" className="nav-button">Explore</Link>
+        <Link to="/forum" className="nav-button">Forum</Link>
         {userLoggedIn && (
           <Link to="/saved" className="nav-button">Saved</Link>
         )}
