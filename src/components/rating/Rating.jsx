@@ -8,11 +8,12 @@ const Rating = ({ hostelId }) => {
   const { currentUser } = useAuth();
   const [rating, setRating] = useState(null);
   const [editMode, setEditMode] = useState(false);
-
+  const backendUrl =  import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+  
   useEffect(() => {
     const fetchRating = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/hostels/${hostelId}`);
+        const response = await axios.get(`${backendUrl}/hostels/${hostelId}`);
         const hostel = response.data;
         const userRating = hostel.ratings?.find(r => r.userId === currentUser.uid);
         if (userRating) {
@@ -30,7 +31,7 @@ const Rating = ({ hostelId }) => {
     try {
       console.log("Submitting rating:", { userId: currentUser.uid, rating: newRating });
 
-      const response = await axios.post(`http://localhost:5000/api/hostels/rate-hostel/${hostelId}`, {
+      const response = await axios.post(`${backendUrl}/hostels/rate-hostel/${hostelId}`, {
         userId: currentUser.uid,
         rating: Number(newRating),
       });
@@ -48,7 +49,7 @@ const Rating = ({ hostelId }) => {
     try {
       console.log("Deleting rating for user:", currentUser.uid);
 
-      const response = await axios.post(`http://localhost:5000/api/hostels/delete-rating/${hostelId}`, {
+      const response = await axios.post(`${backendUrl}/hostels/delete-rating/${hostelId}`, {
         userId: currentUser.uid,
       });
 
