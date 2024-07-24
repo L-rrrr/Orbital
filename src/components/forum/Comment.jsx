@@ -5,7 +5,7 @@ import { useAuth } from '../../contexts/authContext';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-//import './Comment.css';
+import './Comment.css';
 import { format } from 'date-fns';
 
 const Comment = ({ postId, comment }) => {
@@ -23,12 +23,12 @@ const Comment = ({ postId, comment }) => {
     }, [comment.upvotes, comment.upvotedBy]);
 
     const deleteComment = async () => {
-        await deleteDoc(doc(db, "generalPosts", postId, "comments", comment.id));
+        await deleteDoc(doc(db, "forumPosts", postId, "comments", comment.id));
     };
 
     const addReply = async () => {
         if (reply !== "") {
-            await addDoc(collection(db, "generalPosts", postId, "comments", comment.id, "replies"), {
+            await addDoc(collection(db, "forumPosts", postId, "comments", comment.id, "replies"), {
                 comment: reply,
                 createdAt: serverTimestamp(),
                 uid: currentUser.uid,
@@ -42,7 +42,7 @@ const Comment = ({ postId, comment }) => {
     };
 
     const editComment = async () => {
-        await updateDoc(doc(db, "generalPosts", postId, "comments", comment.id), {
+        await updateDoc(doc(db, "forumPosts", postId, "comments", comment.id), {
             comment: editedComment,
             updatedAt: serverTimestamp()
         });
@@ -50,7 +50,7 @@ const Comment = ({ postId, comment }) => {
     };
 
     const handleUpvote = async () => {
-        const commentRef = doc(db, "generalPosts", postId, "comments", comment.id);
+        const commentRef = doc(db, "forumPosts", postId, "comments", comment.id);
         if (upvotedBy.includes(currentUser.uid)) {
             // Remove upvote
             const newUpvotes = upvotes - 1;
@@ -140,7 +140,7 @@ const Replies = ({ postId, commentId }) => {
     const [editedReply, setEditedReply] = useState("");
 
     useEffect(() => {
-        const q = query(collection(db, "generalPosts", postId, "comments", commentId, "replies"), orderBy('createdAt'));
+        const q = query(collection(db, "forumPosts", postId, "comments", commentId, "replies"), orderBy('createdAt', 'desc'));
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             let repliesArray = [];
@@ -154,11 +154,11 @@ const Replies = ({ postId, commentId }) => {
     }, [postId, commentId]);
 
     const deleteReply = async (replyId) => {
-        await deleteDoc(doc(db, "generalPosts", postId, "comments", commentId, "replies", replyId));
+        await deleteDoc(doc(db, "forumPosts", postId, "comments", commentId, "replies", replyId));
     };
 
     const editReply = async (replyId, newReply) => {
-        await updateDoc(doc(db, "generalPosts", postId, "comments", commentId, "replies", replyId), {
+        await updateDoc(doc(db, "forumPosts", postId, "comments", commentId, "replies", replyId), {
             comment: newReply,
             updatedAt: serverTimestamp()
         });

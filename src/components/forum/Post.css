@@ -8,8 +8,7 @@
 
 .post-header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .post-user-profile {
@@ -23,9 +22,35 @@
     flex-grow: 1;
 }
 
+.post-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+.post-title-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-title-link:hover .post-title {
+    text-decoration: underline;
+}
+
+
+
+.post-details {
+    font-size: 12px;
+    margin-top: 4px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
 .post-actions {
     display: flex;
     gap: 8px;
+    margin-left: auto;
 }
 
 .edit-post-button, .delete-post-button, .upvote-button, .comments-link {
@@ -51,12 +76,6 @@
     font-size: 18px;
     box-sizing: border-box;
     font-weight: bold;
-}
-
-.post-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0;
 }
 
 .edit-body-textarea {

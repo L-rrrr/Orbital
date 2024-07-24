@@ -4,7 +4,7 @@ import { db } from "../../firebase/firebase";
 import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 import { useAuth } from '../../contexts/authContext';
 import Post from './Post';
-//import './Forum.css';
+import './Forum.css'; // Import the new CSS file
 
 const Forum = () => {
     const { currentUser } = useAuth();
@@ -25,10 +25,10 @@ const Forum = () => {
     }, [currentUser.uid]);
 
     return (
-        <div id="forum-content-container">
-            <h2>Forum</h2>
-            <NavLink to='/forum/createpost'>Create Post</NavLink>
-            <div id="forum-posts-container">
+        <div className="forum-content-container">
+            <h2 className="forum-title">Forum</h2>
+            <NavLink to='/forum/createpost' className="create-post-button">Create Post</NavLink>
+            <div className="forum-posts-container">
                 {posts.map(post => (
                     <Post key={post.id} post={post} />
                 ))}

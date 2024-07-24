@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../contexts/authContext';
 import { db } from "../../firebase/firebase";
-import { doc, deleteDoc, updateDoc, arrayUnion, arrayRemove, serverTimestamp } from 'firebase/firestore';
+import { doc, deleteDoc, updateDoc, arrayUnion, arrayRemove, serverTimestamp, collection, query, onSnapshot } from 'firebase/firestore';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import CommentIcon from '@mui/icons-material/Comment';
 import { format } from 'date-fns';
 import './Post.css';
 
@@ -18,6 +19,7 @@ const Post = ({ post }) => {
     const [upvotedBy, setUpvotedBy] = useState(post.upvotedBy || []);
     const [displayName, setDisplayName] = useState(post.displayName);
     const [photoURL, setPhotoURL] = useState(post.photoURL);
+    const [commentsCount, setCommentsCount] = useState(0);
 
     useEffect(() => {
         if (currentUser?.uid === post.uid) {
@@ -25,6 +27,14 @@ const Post = ({ post }) => {
             setPhotoURL(currentUser.photoURL);
         }
     }, [currentUser, post.uid]);
+
+    useEffect(() => {
+        const q = query(collection(db, "forumPosts", post.id, "comments"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            setCommentsCount(querySnapshot.size);
+        });
+        return () => unsubscribe();
+    }, [post.id]);
 
     const deletePost = async () => {
         await deleteDoc(doc(db, "forumPosts", post.id));
@@ -80,10 +90,14 @@ const Post = ({ post }) => {
                             placeholder="Title of post (max 50 characters)"
                         />
                     ) : (
-                        <h2 className="post-title">{post.title}</h2>
+                        <NavLink to={`/forum/${post.id}`} className="post-title-link">
+                            <h2 className="post-title">{post.title}</h2>
+                        </NavLink>
                     )}
-                    <p>Posted by: {displayName}</p>
-                    <p>Created at: {formatDate(post.createdAt)} {post.updatedAt && `(Edited at: ${formatDate(post.updatedAt)})`}</p>
+                    <div className="post-details">
+                        <p>Posted by: {displayName}</p>
+                        <p>Created at: {formatDate(post.createdAt)} {post.updatedAt && `(Edited at: ${formatDate(post.updatedAt)})`}</p>
+                    </div>
                 </div>
                 {currentUser.uid === post.uid && (
                     <div className="post-actions">
@@ -117,7 +131,9 @@ const Post = ({ post }) => {
                 <button onClick={handleUpvote} className="upvote-button">
                     <ThumbUpIcon /> {upvotes}
                 </button>
-                <NavLink to={`/forum/${post.id}`} className="comments-link">Comments</NavLink>
+                <NavLink to={`/forum/${post.id}`} className="comments-link">
+                    <CommentIcon /> {commentsCount} Comments
+                </NavLink>
             </div>
         </div>
     );

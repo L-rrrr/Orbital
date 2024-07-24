@@ -1,0 +1,60 @@
+.comments-page-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+    background-color: #6b46c1;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.back-button:hover {
+    transform: scale(1.05);
+    background-color: #5a39a7;
+}
+
+.post-details {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.post-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.post-user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.post-user-profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.post-content {
+    white-space: pre-wrap; /* Ensures long text wraps properly */
+    word-wrap: break-word;
+}
+
+.current-comments-container {
+    margin-top: 20px;
+}
