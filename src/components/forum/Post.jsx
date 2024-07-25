@@ -6,6 +6,7 @@ import { doc, deleteDoc, updateDoc, arrayUnion, arrayRemove, serverTimestamp, co
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import CommentIcon from '@mui/icons-material/Comment';
 import { format } from 'date-fns';
 import './Post.css';
@@ -129,7 +130,7 @@ const Post = ({ post }) => {
             </div>
             <div className="post-footer">
                 <button onClick={handleUpvote} className="upvote-button">
-                    <ThumbUpIcon /> {upvotes}
+                    {upvotedBy.includes(currentUser.uid) ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />} {upvotes}
                 </button>
                 <NavLink to={`/forum/${post.id}`} className="comments-link">
                     <CommentIcon /> {commentsCount} Comments
