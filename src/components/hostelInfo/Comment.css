@@ -91,6 +91,11 @@
     padding: 0;
 }
 
+.reply-button:hover {
+    transform: scale(1.1);
+    color: white;
+}
+
 #reply-input-container {
     display: flex;
     flex-direction: column;

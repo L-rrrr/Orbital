@@ -27,7 +27,6 @@ const Header = () => {
           <span>NUStay</span>
         </Link>
         <Link to="/home" className="nav-button">Home</Link>
-        <Link to="/explore" className="nav-button">Explore</Link>
         <Link to="/forum" className="nav-button">Forum</Link>
         {userLoggedIn && (
           <Link to="/saved" className="nav-button">Saved</Link>
