@@ -110,12 +110,42 @@
   font-weight: bold;
 }
 
-/* @media (max-width: 768px) {
-  .main-content {
-    flex-direction: column;
-  }
+.sort-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
 
-  .map-container {
-    height: 1000px; 
-  }
-} */
+.sort-group {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.sort-group label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.sort-button {
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: transform 0.3s ease; /* Added transition for enlargement effect */
+}
+
+.sort-button.selected {
+  background-color: #6b46c1;
+  color: #fff;
+}
+
+.sort-button:hover {
+  transform: scale(1.1); /* Enlarges the button on hover */
+}
+

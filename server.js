@@ -51,7 +51,7 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 
 // CORS configuration
-const allowedOrigins = ['https://orbital-chi.vercel.app', 'http://localhost:3000'];
+const allowedOrigins = ['https://orbital-chi.vercel.app', 'http://localhost:3000', 'http://localhost:5173'];
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {

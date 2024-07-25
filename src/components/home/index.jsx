@@ -14,14 +14,15 @@ const Home = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isFilterApplied, setIsFilterApplied] = useState(false);
+  const [orderBy, setOrderBy] = useState('rating'); // State for sorting field
+  const [order, setOrder] = useState('high-to-low'); // State for sorting order
 
   useEffect(() => {
     const fetchHostels = async () => {
       try {
         const response = await apiRequest.get('/hostels');
         const data = response.data;
-        data.sort((a, b) => b.averageRating - a.averageRating);
-        setHostels(data);
+        sortHostels(data, orderBy, order); // Sort hostels based on selected field and order
 
         const storedFilteredHostels = localStorage.getItem('filteredHostels');
         const filterApplied = localStorage.getItem('isFilterApplied') === 'true';
@@ -45,11 +46,27 @@ const Home = () => {
     };
 
     fetchHostels();
-  }, [setHostels, setFilteredHostels, location.state]);
+  }, [setHostels, setFilteredHostels, location.state, orderBy, order]);
 
-  // useEffect(() => {
-    // console.log('Filtered Hostels:', filteredHostels); // Debugging line
-  // }, [filteredHostels]);
+  const sortHostels = (data, field, order) => {
+    data.sort((a, b) => {
+      const valueA = field === 'price' ? a.price : a.averageRating;
+      const valueB = field === 'price' ? b.price : b.averageRating;
+      return order === 'high-to-low' ? valueB - valueA : valueA - valueB;
+    });
+    setHostels(data);
+    setFilteredHostels(data);
+  };
+
+  const handleOrderByChange = (field) => {
+    setOrderBy(field);
+    sortHostels([...filteredHostels], field, order);
+  };
+
+  const handleOrderChange = (order) => {
+    setOrder(order);
+    sortHostels([...filteredHostels], orderBy, order);
+  };
 
   const handleSearch = (filteredData) => {
     setFilteredHostels(filteredData);
@@ -76,7 +93,7 @@ const Home = () => {
         <h1>NUStay</h1>
       </header>
 
-      <div className="search-bar-container"> 
+      <div className="search-bar-container">
         <SearchBar hostels={hostels} setFilteredHostels={handleSearch} />
         <button className="filter-button profile" onClick={handleFilterClick}>
           Filter
@@ -88,13 +105,26 @@ const Home = () => {
         )}
       </div>
 
+      <div className="sort-container">
+        <div className="sort-group">
+          <label>Order By:</label>
+          <button className={`sort-button ${orderBy === 'price' ? 'selected' : ''}`} onClick={() => handleOrderByChange('price')}>Price</button>
+          <button className={`sort-button ${orderBy === 'rating' ? 'selected' : ''}`} onClick={() => handleOrderByChange('rating')}>Rating</button>
+        </div>
+        <div className="sort-group">
+          <label>Order:</label>
+          <button className={`sort-button ${order === 'high-to-low' ? 'selected' : ''}`} onClick={() => handleOrderChange('high-to-low')}>High to Low</button>
+          <button className={`sort-button ${order === 'low-to-high' ? 'selected' : ''}`} onClick={() => handleOrderChange('low-to-high')}>Low to High</button>
+        </div>
+      </div>
+
       <div className="main-content">
         <div className="hostel-list-section">
           <h2>Top rated hostels in NUS</h2>
           <List posts={filteredHostels} />
         </div>
         <div className="map-explore-section">
-          <h2>Map(click on pin to view hostel info)</h2>
+          <h2>Map (click on pin to view hostel info)</h2>
           <div className="home-map-container">
             <Map items={filteredHostels} />
           </div>

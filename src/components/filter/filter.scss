@@ -1,96 +1,110 @@
 .filter-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+
+  h2 {
+    margin-bottom: 50px;
+    font-size: 30px; /* Increased font size */
+  }
+
+  .filter-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  
-    h2 {
-      margin-bottom: 50px;
-      font-size: 30px; /* Increased font size */
-    }
-  
-    .filter-container {
+    width: 100%;
+    max-width: 1000px;
+
+    .filter-row,
+    .price-row {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      justify-content: flex-start;
       width: 100%;
-      max-width: 1000px;
-  
-      .filter-row,
-      .price-row {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        width: 100%;
-        margin-bottom: 15px;
-  
-        .filter-item {
-          flex: 1;
-          margin-right: 20px; /* Adjusted margin to separate columns */
-  
-          &:last-child {
-            margin-right: 0;
-          }
-  
-          label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 23px; /* Increased font size */
-          }
-  
-          .button-group {
-            display: flex;
-            flex-wrap: nowrap; /* Ensure all buttons are on the same row */
-  
-            .filter-button {
-              padding: 10px;
-              margin-right: 10px;
-              border: 1px solid #ccc; /* Grey border */
-              background-color: white;
-              color: black;
-              cursor: pointer;
-              transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-              font-size: 20px; /* Increased font size */
-              border-radius: 20px; /* Rounded corners */
-  
-              &:hover {
-                background-color: #f0f0f0; /* Light grey on hover */
-              }
-  
-              &.selected {
-                background: linear-gradient(to bottom, #917afd, #6246ea);
-                color: white;
-                border-color: #ccc; /* Grey border for selected state */
-              }
+      margin-bottom: 15px;
+
+      .filter-item {
+        flex: 1;
+        margin-right: 20px; /* Adjusted margin to separate columns */
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 5px;
+          font-size: 23px; /* Increased font size */
+        }
+
+        .button-group {
+          display: flex;
+          flex-wrap: nowrap; /* Ensure all buttons are on the same row */
+
+          .filter-button {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc; /* Grey border */
+            background-color: white;
+            color: black;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            font-size: 20px; /* Increased font size */
+            border-radius: 20px; /* Rounded corners */
+
+            &:hover {
+              background-color: #f0f0f0; /* Light grey on hover */
+            }
+
+            &.selected {
+              background: linear-gradient(to bottom, #917afd, #6246ea);
+              color: white;
+              border-color: #ccc; /* Grey border for selected state */
             }
           }
-  
-          input {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            font-size: 20px; /* Increased font size */
-          }
+        }
+
+        input {
+          width: 100%;
+          padding: 8px;
+          box-sizing: border-box;
+          font-size: 20px; /* Increased font size */
         }
       }
-  
-      .apply-filter-button,
-      .reset-button {
-        padding: 12px 24px;
-        background-color: #6b46c1; /* Purple background */
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-size: 20px; /* Font size for consistency */
-        border-radius: 8px; /* Consistent border-radius */
-        transition: transform 0.3s ease;
-        border: 1px solid #ccc; /* Grey border */
-        margin-top: 10px; /* Adjust margin */
+    }
+
+    .filter-item {
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 23px; /* Same font size for Min Price and Min Rating */
       }
-  
-      .apply-filter-button:hover,
-      .reset-button:hover {
-        transform: scale(1.1);
+
+      input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        font-size: 20px; /* Same size for sliders */
       }
     }
+
+    .apply-filter-button,
+    .reset-button {
+      padding: 12px 24px;
+      background-color: #6b46c1; /* Purple background */
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 20px; /* Font size for consistency */
+      border-radius: 8px; /* Consistent border-radius */
+      transition: transform 0.3s ease;
+      border: 1px solid #ccc; /* Grey border */
+      margin-top: 10px; /* Adjust margin */
+    }
+
+    .apply-filter-button:hover,
+    .reset-button:hover {
+      transform: scale(1.1);
+    }
   }
-  
+}

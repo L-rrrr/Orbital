@@ -1,0 +1,59 @@
+.about-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 40px;
+
+  /*
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  */
+}
+
+.about-header h1 {
+  font-size: 48px; /* Increase font size for the main title */
+  font-weight: bold; /* Make the main title bold */
+}
+
+.about-content {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.about-section {
+  flex: 1;
+  margin-right: 20px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.5); /* White background with 50% transparency */
+  border-radius: 10px; /* Optional: Rounded corners */
+}
+
+.about-section:last-child {
+  margin-right: 0;
+}
+
+.about-section h2 {
+  margin-bottom: 10px;
+  font-size: 28px; /* Increase font size for section titles */
+}
+
+.about-section p {
+  font-size: 18px; /* Increase font size for text */
+  line-height: 1.6;
+}
+
+.about-section ul {
+  margin-top: 10px;
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.about-section ul li {
+  margin-bottom: 5px;
+}
