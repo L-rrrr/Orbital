@@ -5,6 +5,7 @@ import { useAuth } from '../../contexts/authContext';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import './Comment.css';
 import { format } from 'date-fns';
 
@@ -126,7 +127,7 @@ const Comment = ({ postId, comment }) => {
         )}
         <Replies postId={postId} commentId={comment.id} />
         <button onClick={handleUpvote} className="upvote-button">
-          <ThumbUpIcon /> {upvotes}
+          {upvotedBy.includes(currentUser.uid) ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />} {upvotes}
         </button>
       </div>
     </div>
