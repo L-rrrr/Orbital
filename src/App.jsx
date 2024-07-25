@@ -10,6 +10,9 @@ import HostelInfo from './components/hostelInfo/HostelInfo';
 import SavedHostels from './components/saved/SavedHostels';
 import Profile from './components/user/Profile';
 import Header from './components/header';
+import Forum from './components/forum/Forum';
+import CreatePost from './components/forum/CreatePost';
+import Comments from './components/forum/Comments';
 import AboutPage from './components/about/AboutPage';
 
 function App() {
@@ -22,6 +25,9 @@ function App() {
     { path: '/filter', element: <FilterPage /> },
     { path: '/saved', element: <SavedHostels /> },
     { path: '/profile', element: <Profile /> },
+    { path: '/forum', element: <Forum /> },
+    { path: '/forum/createpost', element: <CreatePost /> },
+    { path: '/forum/:postId', element: <Comments /> },
     { path: '/about', element: <AboutPage /> },
   ];
 

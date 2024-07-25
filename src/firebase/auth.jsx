@@ -10,7 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { writeBatch, doc, getDocs, collectionGroup, query, where } from "firebase/firestore"; // import necessary Firestore functions
+import { writeBatch, doc, getDocs, collection, collectionGroup, query, where } from "firebase/firestore"; // import necessary Firestore functions
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password);
@@ -65,7 +65,7 @@ export const uploadPhoto = async (file, currentUser, setLoading, setCurrentUser)
     setLoading(false);
     alert("Uploaded file! Refresh to see changes.");
 
-    // Update the photoURL in comments and replies
+    // Update the photoURL in comments, replies, and forumPosts
     const batch = writeBatch(db);
 
     // Fetch all comments made by the current user
@@ -77,6 +77,12 @@ export const uploadPhoto = async (file, currentUser, setLoading, setCurrentUser)
     // Fetch all replies made by the current user
     const repliesQuerySnapshot = await getDocs(query(collectionGroup(db, "replies"), where("uid", "==", currentUser.uid)));
     repliesQuerySnapshot.forEach((doc) => {
+      batch.update(doc.ref, { photoURL });
+    });
+
+    // Fetch all forum posts made by the current user
+    const postsQuerySnapshot = await getDocs(query(collection(db, "forumPosts"), where("uid", "==", currentUser.uid)));
+    postsQuerySnapshot.forEach((doc) => {
       batch.update(doc.ref, { photoURL });
     });
 
@@ -104,7 +110,7 @@ export const updateUsername = async (username, currentUser, setLoading, setCurre
     // Update the currentUser state with the new data
     setCurrentUser((prev) => ({ ...prev, displayName: username }));
 
-    // Update the displayName in comments and replies
+    // Update the displayName in comments, replies, and forumPosts
     const batch = writeBatch(db);
 
     // Fetch all comments made by the current user
@@ -119,6 +125,12 @@ export const updateUsername = async (username, currentUser, setLoading, setCurre
       batch.update(doc.ref, { displayName: username });
     });
 
+    // Fetch all forum posts made by the current user
+    const postsQuerySnapshot = await getDocs(query(collection(db, "forumPosts"), where("uid", "==", currentUser.uid)));
+    postsQuerySnapshot.forEach((doc) => {
+      batch.update(doc.ref, { displayName: username });
+    });
+
     await batch.commit();
 
     setLoading(false);
@@ -129,4 +141,3 @@ export const updateUsername = async (username, currentUser, setLoading, setCurre
     alert("Failed to update username");
   }
 };
-
