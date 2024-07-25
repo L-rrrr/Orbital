@@ -1,18 +1,25 @@
 .saved-hostels-page {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .saved-hostels-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .saved-hostels-page h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.saved-hostels-container {
+  display: flex;
+  flex-direction: column; /* Arrange hostels in a column */
+  gap: 20px;
+  max-height: 900px; /* Set a max height for the container */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 10px; /* Add padding to avoid scroll bar overlay */
+}
+
+.saved-hostels-page h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  position: sticky; /* Make the heading sticky */
+  top: 0;
+  background-color: white; /* Background color to avoid overlap issues */
+  z-index: 1; /* Ensure it stays above the scrollable content */
+  padding: 10px 0; /* Add padding for better readability */
+}
