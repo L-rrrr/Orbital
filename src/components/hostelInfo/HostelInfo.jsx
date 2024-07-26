@@ -47,7 +47,7 @@ const HostelInfo = () => {
           <p><strong>Average rating:</strong> {Number(hostel.averageRating).toFixed(1)} ({numberOfRatings})</p>
           <p><strong>Meal Plan:</strong> {hostel.mealPlan}</p>
           <p><strong>Academic Programmes:</strong> {hostel.academicProgrammes}</p>
-          <p><strong>Hostel Activites:</strong> {hostel.hostelActivities}</p>
+          <p><strong>Hostel Activities:</strong> {hostel.hostelActivities}</p>
           <p><strong>Description:</strong> {hostel.description}</p>
           <Rating hostelId={id} />
           <div className={`save-button-container ${isSaved ? 'saved' : ''}`} onClick={handleSave}>
