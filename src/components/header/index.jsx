@@ -19,6 +19,14 @@ const Header = () => {
     }
   }, [currentUser]);
 
+  const handleForumClick = () => {
+    if (userLoggedIn) {
+      navigate('/forum');
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <nav>
       <div className="left">
@@ -27,7 +35,7 @@ const Header = () => {
           <span>NUStay</span>
         </Link>
         <Link to="/home" className="nav-button">Home</Link>
-        <Link to="/forum" className="nav-button">Forum</Link>
+        <button onClick={handleForumClick} className="nav-button">Forum</button>
         {userLoggedIn && (
           <Link to="/saved" className="nav-button">Saved</Link>
         )}
