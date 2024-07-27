@@ -14,16 +14,15 @@
 //   const navigate = useNavigate();
 //   const location = useLocation();
 //   const [isFilterApplied, setIsFilterApplied] = useState(false);
-//   const [orderBy, setOrderBy] = useState('rating'); // State for sorting field
-//   const [order, setOrder] = useState('high-to-low'); // State for sorting order
-//   const [originalHostels, setOriginalHostels] = useState([]); // State to store original hostels
+//   const [orderBy, setOrderBy] = useState(() => localStorage.getItem('orderBy') || 'rating'); // Default sorting field
+//   const [order, setOrder] = useState(() => localStorage.getItem('order') || 'high-to-low'); // Default sorting order
 
 //   useEffect(() => {
 //     const fetchHostels = async () => {
 //       try {
 //         const response = await apiRequest.get('/hostels');
 //         const data = response.data;
-//         setOriginalHostels(data); // Store the original hostels data
+//         setHostels(data); // Store the original hostels data
 
 //         const storedFilteredHostels = localStorage.getItem('filteredHostels');
 //         const filterApplied = localStorage.getItem('isFilterApplied') === 'true';
@@ -63,29 +62,35 @@
 
 //   const handleOrderByChange = (field) => {
 //     setOrderBy(field);
+//     localStorage.setItem('orderBy', field); // Store orderBy state in local storage
 //     sortHostels(filteredHostels, field, order);
 //   };
 
 //   const handleOrderChange = (order) => {
 //     setOrder(order);
+//     localStorage.setItem('order', order); // Store order state in local storage
 //     sortHostels(filteredHostels, orderBy, order);
 //   };
 
-//   const handleSearch = (filteredData) => {
+//   const handleSearch = (searchTerm) => {
+//     const filteredData = hostels.filter((hostel) =>
+//       hostel.name.toLowerCase().includes(searchTerm.toLowerCase())
+//     );
 //     setFilteredHostels(filteredData);
 //     sortHostels(filteredData, orderBy, order); // Sort after setting filtered data
 //   };
+  
 
 //   const handleFilterClick = () => {
 //     navigate('/filter', { state: { fromFilter: true } });
 //   };
 
 //   const handleCancelFilter = () => {
-//     setFilteredHostels(originalHostels);
-//     sortHostels(originalHostels, orderBy, order); // Sort after setting original data
+//     setFilteredHostels(hostels);
 //     localStorage.removeItem('filteredHostels');
 //     localStorage.removeItem('isFilterApplied');
 //     setIsFilterApplied(false);
+//     sortHostels(hostels, orderBy, order); // Sort after canceling filter
 //   };
 
 //   if (!userLoggedIn) {
@@ -145,7 +150,6 @@
 // export default Home;
 
 
-
 import React, { useEffect, useState } from 'react';
 import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/authContext';
@@ -154,7 +158,7 @@ import List from '../list/List';
 import Map from '../map/Map';
 import SearchBar from '../searchBar/SearchBar'; 
 import './home.css';
-import apiRequest from '../../lib/apiRequest'; // Add the import here
+import apiRequest from '../../lib/apiRequest';
 
 const Home = () => {
   const { currentUser, userLoggedIn } = useAuth();
@@ -211,18 +215,38 @@ const Home = () => {
   const handleOrderByChange = (field) => {
     setOrderBy(field);
     localStorage.setItem('orderBy', field); // Store orderBy state in local storage
-    sortHostels(filteredHostels, field, order);
+    sortHostels(filteredHostels.length > 0 ? filteredHostels : hostels, field, order);
   };
 
   const handleOrderChange = (order) => {
     setOrder(order);
     localStorage.setItem('order', order); // Store order state in local storage
-    sortHostels(filteredHostels, orderBy, order);
+    sortHostels(filteredHostels.length > 0 ? filteredHostels : hostels, orderBy, order);
   };
 
-  const handleSearch = (filteredData) => {
-    setFilteredHostels(filteredData);
-    sortHostels(filteredData, orderBy, order); // Sort after setting filtered data
+  const handleSearch = (searchTerm) => {
+    const filteredData = hostels.filter((hostel) =>
+      hostel.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    // setFilteredHostels(filteredData);
+    // sortHostels(filteredData, orderBy, order); // Sort after setting filtered data
+    const storedOrderBy = localStorage.getItem('orderBy');
+    const storedOrder = localStorage.getItem('order');
+
+    // Preserve the sorting state
+    const sortField = storedOrderBy || 'rating';
+    const sortOrder = storedOrder || 'high-to-low';
+
+    const sortedFilteredData = [...filteredData].sort((a, b) => {
+      const valueA = sortField === 'price' ? a.price : a.averageRating;
+      const valueB = sortField === 'price' ? b.price : b.averageRating;
+      return sortOrder === 'high-to-low' ? valueB - valueA : valueA - valueB;
+    });
+
+    setFilteredHostels(sortedFilteredData);
+    localStorage.setItem('filteredHostels', JSON.stringify(sortedFilteredData)); // Save filtered data to local storage
+    localStorage.setItem('isFilterApplied', 'true'); // Save filter state to local storage
+    setIsFilterApplied(true);
   };
 
   const handleFilterClick = () => {
@@ -248,7 +272,7 @@ const Home = () => {
       </header>
 
       <div className="search-bar-container">
-        <SearchBar hostels={hostels} setFilteredHostels={handleSearch} />
+        <SearchBar onSearch={handleSearch} isFilterApplied={isFilterApplied} />
         <button className="filter-button profile" onClick={handleFilterClick}>
           Filter
         </button>
