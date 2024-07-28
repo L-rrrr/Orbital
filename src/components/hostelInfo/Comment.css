@@ -115,7 +115,7 @@
 
 .submit-button, .cancel-button {
     padding: 12px 24px;
-    margin-top: 2%;
+    margin-top: 0px;
     border: none;
     border-radius: 8px;
     font-family: 'Josefin Sans', sans-serif;

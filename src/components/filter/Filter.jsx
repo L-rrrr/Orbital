@@ -92,7 +92,7 @@ const Filter = () => {
           <div className="filter-item">
             <label>Room Type</label>
             <div className="button-group">
-              {['Single', 'Shared', 'Apartment'].map(type => (
+              {['Single', 'Double', 'Apt'].map(type => (
                 <button
                   key={type}
                   className={`filter-button ${roomType.includes(type) ? 'selected' : ''}`}
