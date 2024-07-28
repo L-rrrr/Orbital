@@ -1,43 +1,7 @@
-// import React, { useState } from 'react';
-// import './searchBar.scss';
-
-// const SearchBar = ({ hostels, setFilteredHostels }) => {
-//   const [searchTerm, setSearchTerm] = useState('');
-
-//   const handleSearchTermChange = (e) => {
-//     setSearchTerm(e.target.value);
-//   };
-
-//   const handleApplySearch = () => {
-//     const term = searchTerm.toLowerCase();
-//     const filtered = hostels.filter((hostel) =>
-//       hostel.name.toLowerCase().includes(term) || hostel.type.toLowerCase().includes(term)
-//     );
-//     setFilteredHostels(filtered);
-//   };
-
-//   return (
-//     <div className="search-bar-container">
-//       <input
-//         type="text"
-//         placeholder="Search hostel by name"
-//         className="search-bar"
-//         value={searchTerm}
-//         onChange={handleSearchTermChange}
-//       />
-//       <button className="apply-search-button" onClick={handleApplySearch}>
-//         Search
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default SearchBar;
-
 import React, { useState } from 'react';
 import './searchBar.scss';
 
-const SearchBar = ({ onSearch, isFilterApplied, isSearchApplied }) => {
+const SearchBar = ({ onSearch, isFilterApplied }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = () => {
@@ -70,4 +34,3 @@ const SearchBar = ({ onSearch, isFilterApplied, isSearchApplied }) => {
 };
 
 export default SearchBar;
-

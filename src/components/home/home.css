@@ -41,12 +41,12 @@
 }
 
 .cancel-filter-button {
-  padding: 0px 0px;
+  padding: 10px 20px;
   background-color: #ff4d4d;
   color: white;
   border: none;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 0px;
   border-radius: 8px;
   transition: transform 0.3s ease;
 }
