@@ -49,7 +49,7 @@ const Home = () => {
     };
 
     fetchHostels();
-  }, [setHostels, setFilteredHostels, location.state, orderBy, order]);
+  }, [setHostels, setFilteredHostels, location.state]);
 
   const sortHostels = (data, field, order) => {
     const sortedData = [...data].sort((a, b) => {
@@ -61,23 +61,22 @@ const Home = () => {
   };
 
   const handleOrderByChange = (field) => {
-    setOrderBy(field);
-    localStorage.setItem('orderBy', field); // Store orderBy state in local storage
-    sortHostels(filteredHostels.length > 0 ? filteredHostels : hostels, field, order);
+    const newOrderBy = field;
+    setOrderBy(newOrderBy);
+    localStorage.setItem('orderBy', newOrderBy); // Store orderBy state in local storage
+    sortHostels(filteredHostels.length > 0 ? filteredHostels : hostels, newOrderBy, order);
   };
 
-  const handleOrderChange = (order) => {
-    setOrder(order);
-    localStorage.setItem('order', order); // Store order state in local storage
-    sortHostels(filteredHostels.length > 0 ? filteredHostels : hostels, orderBy, order);
+  const handleOrderChange = (newOrder) => {
+    setOrder(newOrder);
+    localStorage.setItem('order', newOrder); // Store order state in local storage
+    sortHostels(filteredHostels.length > 0 ? filteredHostels : hostels, orderBy, newOrder);
   };
 
   const handleSearch = (searchTerm) => {
     const filteredData = hostels.filter((hostel) =>
       hostel.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    // setFilteredHostels(filteredData);
-    // sortHostels(filteredData, orderBy, order); // Sort after setting filtered data
     const storedOrderBy = localStorage.getItem('orderBy');
     const storedOrder = localStorage.getItem('order');
 
