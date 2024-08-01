@@ -21,10 +21,10 @@ const AboutPage = () => {
           <p>
             We have several exciting plans for the future of NUStay, including:
             <ul>
-              <li>Develop a mobile application for iOS and Android that provides access to all the features of the website, allowing students to browse and manage their hostel options on the go.</li>
+              <li>Complete the mobile adaptation of the website, allowing students to browse and manage their hostel options on the go.</li>
               <li>Implementing advanced search and filter functionalities such as filter by distance to help users find their ideal accommodation more easily.</li>
               <li>Add a notification feature so that users will be notified when their comments in the forum are replied to by other users.</li>
-              <li>Add more information to the hostel information page such as facilities of each hostel.</li>
+              <li>Add more information to the hostel information page such as facilities and major events of each hostel.</li>
             </ul>
           </p>
         </section>
